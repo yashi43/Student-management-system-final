@@ -1,4 +1,15 @@
+<<<<<<< HEAD
 venv/
 __pycache__/
 *.sqlite3
 *.log
+=======
+*.pyc
+__pycache__/
+*.sqlite3
+*.log
+venv/
+.env
+/staticfiles/
+node_modules/
+>>>>>>> master

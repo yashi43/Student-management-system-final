@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Management System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #f7f7f7;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        a {
+            text-decoration: none;
+            color: white;
+            background-color: #4CAF50;
+            padding: 8px 12px;
+            border-radius: 5px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            margin: 20px auto;
+            background-color: white;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            text-align: center;
+            padding: 10px;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .delete-btn {
+            background-color: red;
+            padding: 5px 10px;
+            border-radius: 4px;
+            color: white;
+        }
+        .add-btn {
+            display: block;
+            width: fit-content;
+            margin: 0 auto 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🎓 Student Management System</h1>
+
+    <!-- Add Student Button -->
+    <a href="/add/" class="add-btn">Add New Student</a>
+
+    <!-- Table of Students -->
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Course</th>
+            <th>Roll No</th>
+            <th>Address</th>
+            <th>Action</th>
+        </tr>
+
+        {% for s in students %}
+        <tr>
+            <td>{{ s.name }}</td>
+            <td>{{ s.email }}</td>
+            <td>{{ s.course }}</td>
+            <td>{{ s.roll_number }}</td>
+            <td>{{ s.address }}</td>
+            <td>
+                <a href="/delete/{{ s.id }}/" class="delete-btn">Delete</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="6">No students found.</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
