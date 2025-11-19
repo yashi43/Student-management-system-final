@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}Delete Student{% endblock %}
+
+{% block content %}
+
+<style>
+    .delete-card {
+        max-width: 500px;
+        margin: 60px auto;
+        background: white;
+        padding: 30px;
+        border-radius: 14px;
+        text-align: center;
+        box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+    }
+</style>
+
+<div class="delete-card">
+    <h2 class="mb-3 text-danger">⚠ Delete Student</h2>
+    <p class="mb-4">
+        Are you sure you want to delete  
+        <strong>{{ student.name }}</strong>?
+    </p>
+
+    <form method="POST" class="mb-3">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger w-100">
+            Yes, Delete
+        </button>
+    </form>
+
+    <a href="{% url 'home' %}" class="btn btn-secondary w-100">
+        Cancel
+    </a>
+</div>
+
+{% endblock %}

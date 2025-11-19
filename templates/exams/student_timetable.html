@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}Student Timetable{% endblock %}
+
+{% block content %}
+
+<style>
+    body { background:#f5f7fb; }
+    .timetable-container {
+        max-width:900px;
+        margin:40px auto;
+        padding:25px;
+        background:white;
+        border-radius:12px;
+        box-shadow:0 4px 14px rgba(0,0,0,0.08);
+    }
+    h2 {
+        font-weight:600;
+    }
+</style>
+
+<div class="timetable-container">
+    <h2 class="text-center mb-4">{{ student.name }}'s Exam Timetable</h2>
+
+    <table class="table table-striped table-bordered">
+        <thead class="table-success">
+            <tr>
+                <th>Subject</th>
+                <th>Date</th>
+                <th>Start</th>
+                <th>End</th>
+                <th>Room</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for e in exams %}
+            <tr>
+                <td>{{ e.subject.name }}</td>
+                <td>{{ e.date }}</td>
+                <td>{{ e.start_time }}</td>
+                <td>{{ e.end_time }}</td>
+                <td>{{ e.room }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {% if exams|length == 0 %}
+    <div class="alert alert-warning text-center mt-3">
+        No exams assigned for this student yet.
+    </div>
+    {% endif %}
+</div>
+
+{% endblock %}

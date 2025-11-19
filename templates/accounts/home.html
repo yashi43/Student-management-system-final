@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<h1 class="dashboard-title text-center mt-4">Exam & Subject Management</h1>
+
+<div class="container mt-5">
+    <div class="row g-4">
+
+       
+        <div class="col-md-4">
+    <a href="/students/add_student/" style="text-decoration:none;">
+        <div class="card p-4 text-center">
+            <div class="card-icon">👨‍🎓</div>
+            <h4>Add Student</h4>
+            <p>Register a new student into the system.</p>
+        </div>
+    </a>
+</div>
+
+
+       
+        <div class="col-md-4">
+            <a href="/students/list/" class="text-decoration-none">
+                <div class="card p-4 text-center">
+                    <div class="card-icon">📄</div>
+                    <h4>View Students</h4>
+                    <p>Browse student records.</p>
+                </div>
+            </a>
+        </div>
+
+        
+        <div class="col-md-4">
+            <a href="/exams/add-subject/" class="text-decoration-none">
+                <div class="card p-4 text-center">
+                    <div class="card-icon">📘</div>
+                    <h4>Add Subject</h4>
+                    <p>Create a subject.</p>
+                </div>
+            </a>
+        </div>
+
+        
+        <div class="col-md-4">
+            <a href="/exams/subjects/" class="text-decoration-none">
+                <div class="card p-4 text-center">
+                    <div class="card-icon">📚</div>
+                    <h4>View Subjects</h4>
+                    <p>See subject list.</p>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-md-4">
+            <a href="/exams/add-exam/" class="text-decoration-none">
+                <div class="card p-4 text-center">
+                    <div class="card-icon">📝</div>
+                    <h4>Add Exam</h4>
+                    <p>Schedule exams.</p>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-md-4">
+            <a href="/exams/timetable/" class="text-decoration-none">
+                <div class="card p-4 text-center">
+                    <div class="card-icon">📅</div>
+                    <h4>View Timetable</h4>
+                    <p>See all exams.</p>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-md-4">
+            <a href="/exams/assign-subject/" class="text-decoration-none">
+                <div class="card p-4 text-center">
+                    <div class="card-icon">👨‍🏫</div>
+                    <h4>Assign Subject</h4>
+                    <p>Assign subjects to students.</p>
+                </div>
+            </a>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

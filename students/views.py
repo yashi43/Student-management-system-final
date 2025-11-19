@@ -1,28 +1,46 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Student
+from .forms import StudentForm
 
-def home(request):
-    students = Student.objects.all()
-    return render(request, 'home.html', {'students': students})
 
 def add_student(request):
-    if request.method == 'POST':
-        name = request.POST.get('name')
-        email = request.POST.get('email')
-        course = request.POST.get('course')
-        roll_number = request.POST.get('roll_number')
-        address = request.POST.get('address')
+    students = Student.objects.all()
+
+    if request.method == "POST":
+        name = request.POST["name"]
+        roll_number = request.POST["roll_number"]
+        email = request.POST["email"]
+
         Student.objects.create(
             name=name,
-            email=email,
-            course=course,
             roll_number=roll_number,
-            address=address
+            email=email
         )
-        return redirect('home')
-    return render(request, 'add.html')
+        return redirect("add_student")
+
+    return render(request, "students/add_student.html", {"students": students})
+
+
+def student_list(request):
+    students = Student.objects.all()
+    return render(request, "students/student_list.html", {"students": students})
+
+
+def update_student(request, id):
+    student = get_object_or_404(Student, id=id)
+
+    if request.method == "POST":
+        form = StudentForm(request.POST, instance=student)
+        if form.is_valid():
+            form.save()
+            return redirect("student_list")
+    else:
+        form = StudentForm(instance=student)
+
+    return render(request, "students/update_student.html", {"form": form, "student": student})
+
 
 def delete_student(request, id):
-    student = Student.objects.get(id=id)
+    student = get_object_or_404(Student, id=id)
     student.delete()
-    return redirect('home')
+    return redirect("student_list")

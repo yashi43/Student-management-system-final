@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% block title %}Add Exam{% endblock %}
+
+{% block content %}
+
+<style>
+    body { background:#eef3f9; }
+    .card {
+        max-width:600px; margin:auto; margin-top:40px;
+        padding:25px; border-radius:12px;
+        box-shadow:0 4px 12px rgba(0,0,0,0.1);
+        background:white;
+    }
+    .table-container {
+        max-width:900px;
+        margin:40px auto;
+        padding:20px;
+        background:white;
+        border-radius:12px;
+        box-shadow:0 4px 12px rgba(0,0,0,0.08);
+    }
+</style>
+
+<div class="card">
+    <h2 class="text-center mb-4">📝 Add Exam Schedule</h2>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <label class="form-label">Select Subject</label>
+        <select name="subject" class="form-select mb-3" required>
+            {% for s in subjects %}
+            <option value="{{ s.id }}">{{ s.name }}</option>
+            {% endfor %}
+        </select>
+
+        <label class="form-label">Date</label>
+        <input type="date" name="date" class="form-control mb-3" required>
+
+        <label class="form-label">Start Time</label>
+        <input type="time" name="start_time" class="form-control mb-3" required>
+
+        <label class="form-label">End Time</label>
+        <input type="time" name="end_time" class="form-control mb-3" required>
+
+        <label class="form-label">Room</label>
+        <input type="text" name="room" class="form-control mb-3" required>
+
+        <button class="btn btn-success w-100 mt-3">Add Exam</button>
+    </form>
+</div>
+
+
+{% if exams %}
+<div class="table-container">
+    <h3 class="text-center mb-4">📅 Current Exam Timetable</h3>
+
+    <table class="table table-bordered table-striped">
+        <thead class="table-primary">
+            <tr>
+                <th>Subject</th>
+                <th>Date</th>
+                <th>Start</th>
+                <th>End</th>
+                <th>Room</th>
+                <th style="width: 140px;">Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for e in exams %}
+            <tr>
+                <td>{{ e.subject.name }}</td>
+                <td>{{ e.date }}</td>
+                <td>{{ e.start_time }}</td>
+                <td>{{ e.end_time }}</td>
+                <td>{{ e.room }}</td>
+
+                <td>
+                    <a href="{% url 'delete_exam' e.id %}"
+                       class="btn btn-danger btn-sm"
+                       onclick="return confirm('Delete this exam?');">
+                        Delete
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endif %}
+
+{% endblock %}

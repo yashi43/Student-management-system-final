@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block title %}Add Subject{% endblock %}
+
+{% block content %}
+
+<style>
+    body { background:#f7f9fc; }
+    .card {
+        max-width:500px; margin:auto; margin-top:40px;
+        padding:25px; border-radius:12px;
+        background:white;
+        box-shadow:0 4px 12px rgba(0,0,0,0.1);
+    }
+    .table-container {
+        max-width:700px;
+        margin:40px auto;
+        padding:20px;
+        background:white;
+        border-radius:12px;
+        box-shadow:0 4px 12px rgba(0,0,0,0.08);
+    }
+    .form-control, .form-select {
+        border-radius:8px;
+    }
+</style>
+
+<div class="card">
+    <h2 class="text-center mb-4">📘 Add Subject</h2>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <label class="form-label">Subject Code</label>
+        <input type="text" name="code" class="form-control mb-3" required>
+
+        <label class="form-label">Subject Name</label>
+        <input type="text" name="name" class="form-control mb-3" required>
+
+        <button class="btn btn-primary w-100 mt-3">Add Subject</button>
+    </form>
+</div>
+
+{% if subjects %}
+<div class="table-container">
+    <h3 class="text-center mb-3">📚 Subject List</h3>
+
+    <table class="table table-bordered table-striped">
+        <thead class="table-primary">
+            <tr>
+                <th>Code</th>
+                <th>Name</th>
+                <th style="width: 120px;">Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for s in subjects %}
+            <tr>
+                <td>{{ s.code }}</td>
+                <td>{{ s.name }}</td>
+                <td>
+                    <a href="{% url 'delete_subject' s.id %}"
+                       class="btn btn-danger btn-sm"
+                       onclick="return confirm('Delete this subject?');">
+                        Delete
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endif %}
+
+{% endblock %}

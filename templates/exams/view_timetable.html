@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block title %}Exam Timetable{% endblock %}
+
+{% block content %}
+
+<style>
+    body { background:#f5f7fb; }
+
+    .timetable-container {
+        max-width: 900px;
+        margin: 40px auto;
+        padding: 25px;
+        background: white;
+        border-radius: 14px;
+        box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+    }
+
+    h2 {
+        font-weight: 600;
+    }
+</style>
+
+<div class="timetable-container">
+    <h2 class="text-center mb-4">📅 Exam Timetable</h2>
+
+    <table class="table table-bordered table-hover shadow-sm">
+        <thead class="table-primary">
+            <tr>
+                <th>Subject</th>
+                <th>Date</th>
+                <th>Start</th>
+                <th>End</th>
+                <th>Room</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for e in exams %}
+            <tr>
+                <td>{{ e.subject.name }}</td>
+                <td>{{ e.date }}</td>
+                <td>{{ e.start_time }}</td>
+                <td>{{ e.end_time }}</td>
+                <td>{{ e.room }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5" class="text-center text-muted">
+                    No exams scheduled yet.
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

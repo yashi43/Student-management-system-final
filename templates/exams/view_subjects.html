@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block title %}Subject List{% endblock %}
+
+{% block content %}
+
+<style>
+    body { background:#f4f6f9; }
+
+    .container-box {
+        max-width: 900px;
+        margin: 40px auto;
+        background: white;
+        padding: 30px;
+        border-radius: 14px;
+        box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+    }
+
+    .title-icon {
+        font-size: 36px;
+    }
+
+    .table thead {
+        background: #c9eec9;
+    }
+
+    .btn-back {
+        margin-bottom: 20px;
+    }
+</style>
+
+<div class="container-box">
+
+    <div class="text-center mb-4">
+        <div class="title-icon">📚</div>
+        <h2 class="fw-bold">Subject List</h2>
+        <p class="text-muted">All available subjects</p>
+    </div>
+
+    <a href="{% url 'add_subject' %}" class="btn btn-primary btn-back">⬅ Back to Add Subject</a>
+
+    <table class="table table-bordered table-hover text-center">
+        <thead>
+            <tr class="table-success">
+                <th>Subject Name</th>
+                <th>Subject Code</th>
+                <th style="width:120px;">Action</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for s in subjects %}
+            <tr>
+                <td>{{ s.name }}</td>
+                <td>{{ s.code }}</td>
+                <td>
+                    <a href="{% url 'delete_subject' s.id %}"
+                       class="btn btn-danger btn-sm"
+                       onclick="return confirm('Delete this subject?');">
+                        Delete
+                    </a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="3" class="text-muted">No subjects found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+
+{% endblock %}

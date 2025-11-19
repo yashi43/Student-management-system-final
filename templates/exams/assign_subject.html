@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block title %}Assign Subject{% endblock %}
+
+{% block content %}
+
+<style>
+    body { background:#eef3f9; }
+    .card { 
+        max-width:550px; 
+        margin:auto; 
+        margin-top:40px; 
+        padding:25px; 
+        border-radius:12px;
+        background:white;
+        box-shadow:0 4px 12px rgba(0,0,0,0.1); 
+    }
+    .table-container {
+        max-width:850px;
+        margin:40px auto;
+        padding:20px;
+        background:white;
+        border-radius:12px;
+        box-shadow:0 4px 12px rgba(0,0,0,0.08);
+    }
+</style>
+
+<div class="card">
+    <h2 class="text-center mb-4">👨‍🏫 Assign Subject to Student</h2>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <label class="form-label">Student</label>
+        <select name="student" class="form-select mb-3" required>
+            {% for s in students %}
+            <option value="{{ s.id }}">{{ s.name }}</option>
+            {% endfor %}
+        </select>
+
+        <label class="form-label">Subject</label>
+        <select name="subject" class="form-select mb-3" required>
+            {% for sub in subjects %}
+            <option value="{{ sub.id }}">{{ sub.name }}</option>
+            {% endfor %}
+        </select>
+
+        <button class="btn btn-primary w-100">Assign</button>
+    </form>
+</div>
+
+
+{% if assigned %}
+<div class="table-container">
+    <h3 class="text-center mb-4">📋 Assigned Subjects</h3>
+
+    <table class="table table-bordered table-hover">
+        <thead class="table-info">
+            <tr>
+                <th>Student</th>
+                <th>Subject</th>
+                <th style="width:120px;">Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for a in assigned %}
+            <tr>
+                <td>{{ a.student.name }}</td>
+                <td>{{ a.subject.name }}</td>
+
+                <td>
+                    <a href="{% url 'delete_assignment' a.id %}" 
+                       class="btn btn-danger btn-sm"
+                       onclick="return confirm('Remove this assignment?');">
+                       Delete
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endif %}
+
+{% endblock %}

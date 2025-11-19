@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}Update Student{% endblock %}
+
+{% block content %}
+
+<style>
+    .update-card {
+        max-width: 550px;
+        margin: 60px auto;
+        background: white;
+        padding: 30px;
+        border-radius: 14px;
+        box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+    }
+</style>
+
+<div class="update-card">
+
+    <h2 class="text-center mb-4">✏ Update Student</h2>
+
+    <form method="POST">
+        {% csrf_token %}
+        
+        {{ form.as_p }}
+
+        <button type="submit" class="btn btn-primary w-100 mt-2">Update</button>
+    </form>
+
+    <a href="{% url 'home' %}" class="btn btn-secondary w-100 mt-3">
+        Back
+    </a>
+
+</div>
+
+{% endblock %}

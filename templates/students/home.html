@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+<style>
+    body { background:#f7f9fc; }
+    .dashboard-title {
+        text-align: center;
+        margin-top: 20px;
+        font-weight: bold;
+        color: #333;
+    }
+    .card {
+        border-radius: 12px;
+        transition: 0.2s;
+        cursor: pointer;
+    }
+    .card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+    .card-icon {
+        font-size: 40px;
+        color: #0d6efd;
+        margin-bottom: 10px;
+    }
+</style>
+
+<h1 class="dashboard-title">Exam & Subject Management</h1>
+
+<div class="container mt-4">
+    <div class="row g-4">
+
+        <div class="col-md-4">
+            <a href="/students/add_student/" class="text-decoration-none">
+                <div class="card p-4 text-center">
+                    <div class="card-icon">👨‍🎓</div>
+                    <h4>Add Student</h4>
+                    <p>Register a new student.</p>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-md-4">
+            <a href="/students/list/" class="text-decoration-none">
+                <div class="card p-4 text-center">
+                    <div class="card-icon">📄</div>
+                    <h4>View Students</h4>
+                    <p>See all registered students.</p>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-md-4">
+            <a href="/exams/add-subject/" class="text-decoration-none">
+                <div class="card p-4 text-center">
+                    <div class="card-icon">📘</div>
+                    <h4>Add Subject</h4>
+                    <p>Create a new subject.</p>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-md-4">
+            <a href="/exams/subjects/" class="text-decoration-none">
+                <div class="card p-4 text-center">
+                    <div class="card-icon">📚</div>
+                    <h4>View Subjects</h4>
+                    <p>Browse all subjects.</p>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-md-4">
+            <a href="/exams/add-exam/" class="text-decoration-none">
+                <div class="card p-4 text-center">
+                    <div class="card-icon">📝</div>
+                    <h4>Add Exam</h4>
+                    <p>Schedule a new exam.</p>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-md-4">
+            <a href="/exams/timetable/" class="text-decoration-none">
+                <div class="card p-4 text-center">
+                    <div class="card-icon">📅</div>
+                    <h4>View Timetable</h4>
+                    <p>See the full exam schedule.</p>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-md-4">
+            <a href="/exams/assign-subject/" class="text-decoration-none">
+                <div class="card p-4 text-center">
+                    <div class="card-icon">👨‍🏫</div>
+                    <h4>Assign Subject</h4>
+                    <p>Assign students to subjects.</p>
+                </div>
+            </a>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
