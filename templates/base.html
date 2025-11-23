@@ -8,6 +8,7 @@
 <body style="background:#eef3f9">
 
 
+{% if user.is_authenticated %}
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary px-4">
     <a class="navbar-brand fw-bold" href="/">Dashboard</a>
 
@@ -19,7 +20,7 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
 
-            
+            <!-- Students -->
             <li class="nav-item">
                 <a class="nav-link" href="/students/add_student/">Add Student</a>
             </li>
@@ -27,7 +28,7 @@
                 <a class="nav-link" href="/students/list/">View Students</a>
             </li>
 
-            
+            <!-- Subjects -->
             <li class="nav-item">
                 <a class="nav-link" href="/exams/add-subject/">Add Subject</a>
             </li>
@@ -48,26 +49,32 @@
                 <a class="nav-link" href="/exams/assign-subject/">Assign Subject</a>
             </li>
 
-           
-            {% if user.is_authenticated %}
-                <li class="nav-item">
-                    <a class="nav-link text-warning fw-bold" href="{% url 'logout' %}">
-                        Logout
-                    </a>
-                </li>
-            {% else %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'login' %}">Login</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'signup' %}">Sign Up</a>
-                </li>
-            {% endif %}
+            
+            <li class="nav-item">
+                <form action="{% url 'logout' %}" method="post" class="d-inline">
+                    {% csrf_token %}
+                    <button class="btn btn-warning btn-sm ms-3">Logout</button>
+                </form>
+            </li>
 
         </ul>
     </div>
 </nav>
+
+{% else %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary px-4">
+    <a class="navbar-brand fw-bold" href="/">Student ERP</a>
+    <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'login' %}">Login</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'signup' %}">Sign Up</a>
+        </li>
+    </ul>
+</nav>
+{% endif %}
+
 <div class="container mt-4">
     {% block content %}
     {% endblock %}
