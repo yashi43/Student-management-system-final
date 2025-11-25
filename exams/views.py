@@ -3,7 +3,7 @@ from .models import Subject, ExamSchedule, StudentSubject
 from students.models import Student
 
 def add_subject(request):
-    subjects = Subject.objects.all()   # fetch all existing subjects
+    subjects = Subject.objects.all()   
 
     if request.method == "POST":
         code = request.POST["code"]
@@ -11,7 +11,7 @@ def add_subject(request):
 
         Subject.objects.create(code=code, name=name)
 
-        # Instead of redirecting, reload the same page with updated list
+       
         subjects = Subject.objects.all()
         return render(request, "exams/add_subject.html", {"subjects": subjects})
 
